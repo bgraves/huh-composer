@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name='viewport' content='initial-scale=1.0, user-scalable=no'>
+    <meta charset='utf-8'>
+    <title>HearUsHere</title>
+    <script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <link rel='stylesheet' type='text/css' href='huh-composer.css'>
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">HearUsHere Composer</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="hearushere.nl">Home</a></li>
+            <li class="nav-map active"><a href="#map">Map</a></li>
+            <li class="nav-beacons"><a href="#beacons">iBeacons</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Walk<span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="#" id="open-menu-item">Open</a></li>
+                <li><a href="#" id="save-menu-item">Save</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+    <div id='map-canvas'></div>
+    <div class="location-details panel panel-default hidden">
+      <div class="panel-heading">
+        <h3 class="panel-title">Sound details</h3>
+      </div>
+      <div class="panel-body">
+        <form id='sound-form' enctype='multipart/form-data'>
+          <input name='radius' type='text' placeholder='Radius (ex. 100)'/><br/>
+          <label for='sound'>Sound file:</label>
+          <input name='sound' type='file' /><br/>
+        </form>
+        <button name='save' class="btn btn-primary">Save</button>
+        <button name='delete' class="btn btn-danger">Delete</button>
+      </div>
+    </div>
+    <div class="save-walk panel panel-default centered hidden">
+      <div class="panel-heading">
+        <h3 class="panel-title">Save walk</h3>
+      </div>
+      <div class="panel-body">
+        <form id='walk-form' enctype='multipart/form-data'>
+          <input name='title' type='text' placeholder='Title' /><br/>
+          <textarea name='description' placeholder='Description'></textarea><br/>
+          <label for='sound'>Background sound:</label>
+          <input name='sound' type='file'/><br/>
+          <label for='image'>Image (114x114px):</label>
+          <input name='image' type='file'/><br/>
+        </form>
+        <button name='save-walk' class="btn btn-primary">Save</button>
+        <button name='cancel' class="btn btn-default">Cancel</button>
+      </div>
+    </div>
+    <div class="open-walk panel panel-default centered hidden">
+      <div class="panel-heading">
+        <h3 class="panel-title">Open walk</h3>
+      </div>
+      <div class="panel-body">
+        <input name='title' type='text' placeholder='Title' /><br/>
+        <button name='open-walk' class="btn btn-primary">Open</button>
+      </div>
+    </div>
+    <div class="upload progress centered hidden">
+      <div class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%"><span class="sr-only">60% Complete</span></div>
+    </div>
+    <div class="alert alert-danger hidden" role="alert">
+      <strong>Oh snap!</strong> Change a few things up and try submitting again.
+    </div>
+    <div class="alert alert-success hidden" role="alert">
+      <strong>Success!</strong> You successfully read this important alert message.  
+    </div>
+
+    <!-- iBeacons -->
+    <div class="beacons panel panel-default hidden">
+      <!-- Default panel contents -->
+      <div class="panel-heading">iBeacons</div>
+      <div class="panel-body">
+        <form id='beacon-sound-form' enctype='multipart/form-data'>
+          <input name="uuid" type="text" placeholder="UUID"></input> 
+          <input name="rssi" type="text" placeholder="RSSI"></input> 
+          <br>
+          <label for='sound'>Sound file:</label>
+          <input name='sound' type='file' /><br/>
+        </form>
+        <button class="add btn btn-primary"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+        <div style="clear:both"></div>
+      </div>
+
+      <!-- List group -->
+      <div class="list-group">
+        <a href="#" class="beacon list-group-item hidden">
+          <h4 class="uuid list-group-item-heading">E20A39F4-73F5-4BC4-A12F-17D1AD07A961</h4>
+          <p class="rssi list-group-item-text">RSSI: <strong>-44</strong>
+            <button class="remove btn btn-danger"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>
+          </p>
+          <div style="clear:both"></div>
+       </a>
+      </div>
+    </div>
+  
+  </body>
+  <script type='text/javascript' src='https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=drawing'></script>
+  <script type='text/javascript' src='huh-composer.js'></script>
+</html>
+

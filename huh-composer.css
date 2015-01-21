@@ -1,0 +1,72 @@
+html, body {
+  height: 100%;
+  margin: 0px;
+  padding: 0px
+}
+
+#map-canvas {
+  height: 100%;
+  margin-top: 50px;
+  padding: 0px
+}
+
+br {
+  line-height: 24px;
+}
+
+input, textarea {
+  margin-bottom: 10px;
+}
+
+.centered {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.popup {
+  background: #fff;
+  padding: 10px;
+}
+
+.hidden {
+  display: none;
+}
+
+.location-details {
+  position: absolute;
+  right: 100px;
+  bottom: 100px;
+}
+
+.alert {
+  z-index: 10000;
+  position: fixed;
+  top: 100px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.open-walk button, .save-walk button, .location-details button {
+  float: right;
+  margin-left: 10px;
+}
+
+.upload {
+  z-index: 20000;
+  width: 200px;
+}
+
+.beacons {
+  position: absolute;
+  top: 155px;
+  width: 80%;
+  left: 50%;
+  transform: translate(-50%, 0%);
+}
+
+.beacons .add, .beacons .remove {
+  float: right;
+}
+
