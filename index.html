@@ -27,12 +27,13 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li><a href="hearushere.nl">Home</a></li>
+            <li><a href="http://hearushere.nl">Home</a></li>
             <li class="nav-map active"><a href="#map">Map</a></li>
             <li class="nav-beacons"><a href="#beacons">iBeacons</a></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Walk<span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
+                <li><a href="#" id="new-menu-item">New</a></li>
                 <li><a href="#" id="open-menu-item">Open</a></li>
                 <li><a href="#" id="save-menu-item">Save</a></li>
               </ul>
@@ -98,8 +99,10 @@
       <div class="panel-heading">iBeacons</div>
       <div class="panel-body">
         <form id='beacon-sound-form' enctype='multipart/form-data'>
-          <input name="uuid" type="text" placeholder="UUID"></input> 
-          <input name="radius" type="text" placeholder="radius"></input> 
+          <input name="uuid" type="text" placeholder="iBeacon UUID"></input> 
+          <input name="major" type="text" placeholder="Major"></input> 
+          <input name="minor" type="text" placeholder="Minor"></input> 
+          <input name="radius" type="text" placeholder="Radius (ex. 10)"></input> 
           <br>
           <label for='sound'>Sound file:</label>
           <input name='sound' type='file' /><br/>
@@ -112,7 +115,7 @@
       <div class="list-group">
         <a href="#" class="beacon list-group-item hidden">
           <h4 class="uuid list-group-item-heading">E20A39F4-73F5-4BC4-A12F-17D1AD07A961</h4>
-          <p class="rssi list-group-item-text">RSSI: <strong>-44</strong>
+          <p class="radius list-group-item-text">Radius: <strong>0</strong>m
             <button class="remove btn btn-danger"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>
           </p>
           <div style="clear:both"></div>

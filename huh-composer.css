@@ -34,11 +34,14 @@ input, textarea {
   display: none;
 }
 
+.save-walk {
+  z-index: 30000;
+}
+
 .location-details {
   position: absolute;
   right: 100px;
   bottom: 100px;
-  z-index: 30000;
 }
 
 .alert {
@@ -47,6 +50,10 @@ input, textarea {
   top: 100px;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+.open-walk {
+  z-index: 30000;
 }
 
 .open-walk button, .save-walk button, .location-details button {
@@ -65,6 +72,7 @@ input, textarea {
   width: 80%;
   left: 50%;
   transform: translate(-50%, 0%);
+  z-index: 10;
 }
 
 .beacons .add, .beacons .remove {

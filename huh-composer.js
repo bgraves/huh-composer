@@ -41,8 +41,10 @@ var editBeacons = function() {
       } else {
         handleMessage('Sound file was received');
         var uuid = $('.beacons input[name=uuid]').val();
+        var major = $('.beacons input[name=major]').val();
+        var minor = $('.beacons input[name=minor]').val();
         var radius = $('.beacons input[name=radius]').val();
-        var beacon = { 'uuid': uuid, 'radius': radius, 'file': obj.sound.filename };
+        var beacon = { 'uuid': uuid, 'major': major, 'minor': minor, 'radius': radius, 'file': obj.sound.filename };
         beacons.push(beacon);
 
         drawBeacons();
@@ -57,10 +59,11 @@ var drawBeacons = function() {
   for(var i = 0; i < beacons.length; i++) {
     var beacon = beacons[i];
     var $template = $('.beacon.hidden').clone();
-    $('.uuid', $template).html(beacon.uuid);    
+    var composite = beacon.uuid + ' ' + beacon.major + ' ' + beacon.minor;
+    $('.uuid', $template).html(composite);    
     $('.radius strong', $template).html(beacon.radius);
-    $('.radius .remove', $template).attr('beacon-uuid', beacon.uuid);
-    $template.attr('beacon-uuid', beacon.uuid);
+    $('.radius .remove', $template).attr('beacon-uuid', composite);
+    $template.attr('beacon-uuid', composite);
     $template.removeClass('hidden');
     $('.beacons .list-group').append($template);
   }  
@@ -70,14 +73,15 @@ var drawBeacons = function() {
     var tempBeacons = [];
     for(var i = 0; i < beacons.length; i++) {
       var beacon = beacons[i];
-      if(beacon.uuid != uuid) {
+      var composite = beacon.uuid + ' ' + beacon.major + ' ' + beacon.minor;
+      if(composite != uuid) {
         tempBeacons.push(beacon);
       } else {
         var url = 'http://api.hearushere.nl/delete?file=' + beacon.file;
         $.get(url).fail(function(err) {
           handleError('Failed to delete sound');
         });
-        $('[beacon-uuid='+uuid+']').remove();
+        $('[beacon-uuid='+composite+']').remove();
       }
     }
     beacons = tempBeacons;
@@ -390,6 +394,7 @@ var loadWalk = function(walk) {
       beacons.push(sound);
     }
   }
+  drawBeacons();
 };
 
 var clearMap = function() {
@@ -404,9 +409,15 @@ var clearMap = function() {
     marker.setMap(null);
   }
   markers = [];
+  beacons = [];
+  drawBeacons();
+  loadedWalk = {};
 };
 
 (function () {
+  $('#new-menu-item').click(function(e) {
+    clearMap();
+  }); 
   $('#save-menu-item').click(function(e) {
     handleSave();
   }); 
