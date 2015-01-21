@@ -38,6 +38,7 @@ input, textarea {
   position: absolute;
   right: 100px;
   bottom: 100px;
+  z-index: 30000;
 }
 
 .alert {

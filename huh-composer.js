@@ -41,8 +41,8 @@ var editBeacons = function() {
       } else {
         handleMessage('Sound file was received');
         var uuid = $('.beacons input[name=uuid]').val();
-        var rssi = $('.beacons input[name=rssi]').val();
-        var beacon = { 'uuid': uuid, 'rssi': rssi, 'file': obj.sound.filename };
+        var radius = $('.beacons input[name=radius]').val();
+        var beacon = { 'uuid': uuid, 'radius': radius, 'file': obj.sound.filename };
         beacons.push(beacon);
 
         drawBeacons();
@@ -58,8 +58,8 @@ var drawBeacons = function() {
     var beacon = beacons[i];
     var $template = $('.beacon.hidden').clone();
     $('.uuid', $template).html(beacon.uuid);    
-    $('.rssi strong', $template).html(beacon.rssi);
-    $('.rssi .remove', $template).attr('beacon-uuid', beacon.uuid);
+    $('.radius strong', $template).html(beacon.radius);
+    $('.radius .remove', $template).attr('beacon-uuid', beacon.uuid);
     $template.attr('beacon-uuid', beacon.uuid);
     $template.removeClass('hidden');
     $('.beacons .list-group').append($template);
