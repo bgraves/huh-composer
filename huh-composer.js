@@ -20,7 +20,7 @@ var checkHash = function() {
         editMap();
         break;
     }
-}
+};
 
 var editMap = function() {
   $('.nav-map').addClass('active');  
@@ -34,33 +34,34 @@ var editBeacons = function() {
   $('.beacons').removeClass('hidden');
   drawBeacons();
 
-  $('.beacons .add').click(function(e) {
-    uploadFile($('#beacon-sound-form')[0], function(obj, err) {
-      if(err) {
-        handleError('Sound upload failed');
-      } else {
-        handleMessage('Sound file was received');
-        var uuid = $('.beacons input[name=uuid]').val();
-        var major = $('.beacons input[name=major]').val();
-        var minor = $('.beacons input[name=minor]').val();
-        var radius = $('.beacons input[name=radius]').val();
-        var beacon = { 'uuid': uuid, 'major': major, 'minor': minor, 'radius': radius, 'file': obj.sound.filename };
-        beacons.push(beacon);
+};
 
-        drawBeacons();
-        $('.beacons form')[0].reset(); 
-      }
-    });
+var addBeacon = function() {
+  uploadFile($('#beacon-sound-form')[0], function(obj, err) {
+    if(err) {
+      handleError('Sound upload failed');
+    } else {
+      handleMessage('Sound file was received');
+      var uuid = $('.beacons input[name=uuid]').val();
+      var major = $('.beacons input[name=major]').val();
+      var minor = $('.beacons input[name=minor]').val();
+      var radius = $('.beacons input[name=radius]').val();
+      var beacon = { 'uuid': uuid, 'major': major, 'minor': minor, 'radius': radius, 'file': obj.sound.filename };
+      beacons.push(beacon);
+
+      drawBeacons();
+      $('.beacons form')[0].reset(); 
+    }
   });
 };
 
 var drawBeacons = function() {
-  $('.beacon:not(.hidden)').remove();
+  $('[beacon-uuid]').remove();
   for(var i = 0; i < beacons.length; i++) {
     var beacon = beacons[i];
     var $template = $('.beacon.hidden').clone();
-    var composite = beacon.uuid + ' ' + beacon.major + ' ' + beacon.minor;
-    $('.uuid', $template).html(composite);    
+    var composite = beacon.uuid + beacon.major + beacon.minor;
+    $('.uuid', $template).html(beacon.uuid + ' ' + beacon.major + ' ' + beacon.minor);    
     $('.radius strong', $template).html(beacon.radius);
     $('.radius .remove', $template).attr('beacon-uuid', composite);
     $template.attr('beacon-uuid', composite);
@@ -73,7 +74,7 @@ var drawBeacons = function() {
     var tempBeacons = [];
     for(var i = 0; i < beacons.length; i++) {
       var beacon = beacons[i];
-      var composite = beacon.uuid + ' ' + beacon.major + ' ' + beacon.minor;
+      var composite = beacon.uuid + beacon.major + beacon.minor;
       if(composite != uuid) {
         tempBeacons.push(beacon);
       } else {
@@ -424,6 +425,11 @@ var clearMap = function() {
   $('#open-menu-item').click(function(e) {
     handleOpen();
   }); 
+
+  $('.beacons .add').click(function(e) {
+    addBeacon();
+  });
+
 
   window.onhashchange = function() {
     checkHash();
